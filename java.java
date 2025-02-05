@@ -8,5 +8,9 @@ class java {
         System.out.println(str + " " + str2);
         System.out.println(str == lit3);
 
+        byte b = { 127, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110 };
+        System.out.println(b[0]);
+
+
     }
 }

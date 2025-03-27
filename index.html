@@ -4,47 +4,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <title>API Example</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .error {
+      color: red;
+      background-color: #ffeeee;
+    }
+
+    button {
+      padding: 8px 16px;
+      background-color: #4285f4;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3367d6;
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100">
-  <div class="flex flex-col items-center justify-center bg-green-500 h-38 font-semibold">
-    <h1 class="text-white text-5xl ">Welcome To Your Website Task</h1>
-    <div class="flex justify-center gap-10 mt-5 text-white font-bold text-xl">
-      <a href="#">Home</a>
-      <a href="#">About</a>
-      <a href="#">Contact</a>
-    </div>
-  </div>
-  <div class="flex  items-center justify-between gap-10 mt-10 m-5">
-    <div class="bg-white w-120 h-38 p-4 shadow-lg rounded-lg">
-      <h1 class="text-3xl font-bold  text-green-500">Contact Us</h1>
-      <p class="mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, quo? Lorem ipsum dolor sit.</p>
-    </div>
-    <div class="bg-white w-120 h-38 p-4 shadow-lg rounded-lg">
-      <h1 class="text-3xl font-bold  text-green-500">Contact Us</h1>
-      <p class="mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, quo? Lorem ipsum dolor sit.</p>
-    </div>
-  </div>
-  <div class="flex  items-center justify-between gap-10 mt-10 m-5">
-    <div class="bg-white w-120 h-38 p-4 shadow-lg rounded-lg">
-      <h1 class="text-3xl font-bold  text-green-500">Contact Us</h1>
-      <p class="mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, quo? Lorem ipsum dolor sit.</p>
-    </div>
-    <div class="bg-white w-120 h-38 p-4 shadow-lg rounded-lg">
-      <h1 class="text-3xl font-bold  text-green-500">Contact Us</h1>
-      <p class="mt-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, quo? Lorem ipsum dolor sit.</p>
-    </div>
-  </div>
+<body>
+  <h1>API Test</h1>
+  <p>Click the button to fetch data from the API:</p>
+  <button id="fetchButton">Fetch Data</button>
+  <div id="result">Results will appear here</div>
 
-  <div class="bg-zinc-700 text-white p-5 mt-10">
-    <p class="text-xl text-center">Created by Ronak Kumar | Follow us on <span class="text-green-500"> Instagram</span>
-      | <span class="text-green-500"> Twitter</span> |
-      <span class="text-green-500">
-        Linkdin</span>
-    </p>
-  </div>
+  <script>
+    document.getElementById('fetchButton').addEventListener('click', fetchData);
+
+    function fetchData() {
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = 'Loading...';
+      resultDiv.className = '';
+
+      // Example using JSONPlaceholder API - replace with your actual API URL
+      fetch('https://jsonplaceholder.typicode.com/posts/1')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          resultDiv.innerHTML = `<h3>API Response:</h3><pre>${JSON.stringify(data, null, 2)}</pre>`;
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+          resultDiv.innerHTML = `<h3>Error:</h3><p>${error.message}</p>
+            <p>Check console for more details. Possible issues:</p>
+            <ul>
+              <li>API endpoint incorrect</li>
+              <li>CORS policy blocking the request</li>
+              <li>Network connectivity issues</li>
+              <li>API rate limiting</li>
+            </ul>`;
+          resultDiv.className = 'error';
+        });
+    }
+  </script>
 </body>
 
 </html>

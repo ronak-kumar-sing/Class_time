@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery Demo</title>
+  <!-- Fixed jQuery script tag -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Fallback to local jQuery if needed -->
+  <script>window.jQuery || document.write('<script src="jquery.js"><\/script>')</script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-10">
+
+  <h1 class="text-2xl font-bold mb-6 text-gray-800">jQuery Interactive Demo</h1>
+
+  <!-- Parent Div -->
+  <div id="main" class="space-y-4 w-full max-w-md">
+
+    <!-- First Div -->
+    <div id="div1" class="bg-blue-200 text-center p-4 rounded cursor-pointer hover:bg-blue-300 transition duration-300">
+      Click me to HIDE
+    </div>
+
+    <!-- Second Div -->
+    <div id="div2"
+      class="bg-green-200 text-center p-4 rounded cursor-pointer hover:bg-green-300 transition duration-300">
+      Click me to CHANGE STYLE
+    </div>
+
+    <!-- Third Div -->
+    <div id="div3" class="bg-red-200 text-center p-4 rounded cursor-pointer hover:bg-red-300 transition duration-300">
+      Click me to SLIDE UP & FADE OUT
+    </div>
+
+    <!-- Button for Alert -->
+    <button id="alertBtn"
+      class="mt-6 bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-300">
+      Click for Alert
+    </button>
+
+    <!-- Reset Button -->
+    <button id="resetBtn"
+      class="mt-4 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600 transition duration-300">
+      Reset All
+    </button>
+  </div>
+
+  <!-- jQuery Script -->
+  <script>
+    $(document).ready(function () {
+
+      // Hide first div
+      $("#div1").click(function () {
+        $(this).fadeOut(400);
+      });
+
+      // Change CSS of second div
+      $("#div2").click(function () {
+        $(this).text("Style Changed!")
+          .css({
+            "background-color": "#4ade80", // Tailwind's green-400
+            "color": "white",
+            "border": "2px solid #15803d", // Tailwind green-800
+            "font-weight": "bold",
+            "transform": "scale(1.05)",
+            "box-shadow": "0 4px 6px rgba(0, 0, 0, 0.1)"
+          });
+      });
+
+      // Slide up then fade out third div
+      $("#div3").click(function () {
+        $(this).slideUp(400, function () {
+          $(this).fadeOut(400);
+        });
+      });
+
+      // Alert button
+      $("#alertBtn").click(function () {
+        alert("Hello from jQuery!");
+      });
+
+      // Reset button functionality
+      $("#resetBtn").click(function () {
+        // Reset div1
+        $("#div1").fadeIn(400);
+
+        // Reset div2
+        $("#div2").text("Click me to CHANGE STYLE")
+          .css({
+            "background-color": "",
+            "color": "",
+            "border": "",
+            "font-weight": "",
+            "transform": "",
+            "box-shadow": ""
+          })
+          .attr("class", "bg-green-200 text-center p-4 rounded cursor-pointer hover:bg-green-300 transition duration-300");
+
+        // Reset div3
+        $("#div3").slideDown(400).fadeIn(400);
+      });
+
+    });
+  </script>
+
+</body>
+
+</html>

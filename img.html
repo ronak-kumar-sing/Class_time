@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Gallery</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen p-4 md:p-8">
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow-hidden p-6">
+    <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Product Gallery</h1>
+
+    <div class="flex flex-col items-center">
+      <!-- Main image container -->
+      <div class="mb-6 w-full overflow-hidden">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1726612067601-c3067bfd8d82?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          id="main" alt="Main Image"
+          class="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg transition-all duration-300">
+      </div>
+
+      <!-- Thumbnails container -->
+      <div class="flex flex-wrap justify-center gap-4">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1726612067601-c3067bfd8d82?q=80&w=3387&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          width="60" height="60" alt="Thumbnail 1"
+          class="w-16 h-16 object-cover rounded-md cursor-pointer hover:scale-110 transition-transform border-2 border-transparent hover:border-blue-500"
+          onclick="changeImage(this)">
+
+        <img
+          src="https://images.unsplash.com/photo-1740188305229-63c68ef04712?q=80&w=2912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          width="60" height="60" alt="Thumbnail 2"
+          class="w-16 h-16 object-cover rounded-md cursor-pointer hover:scale-110 transition-transform border-2 border-transparent hover:border-blue-500"
+          onclick="changeImage(this)">
+
+        <img
+          src="https://images.unsplash.com/photo-1741332966361-f242276f9430?q=80&w=3367&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          width="60" height="60" alt="Thumbnail 3"
+          class="w-16 h-16 object-cover rounded-md cursor-pointer hover:scale-110 transition-transform border-2 border-transparent hover:border-blue-500"
+          onclick="changeImage(this)">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function changeImage(img) {
+      const mainImg = document.getElementById('main');
+      mainImg.src = img.src;
+
+      // Add a small animation effect
+      mainImg.classList.add('opacity-70');
+      setTimeout(() => {
+        mainImg.classList.remove('opacity-70');
+      }, 300);
+
+      // Highlight the selected thumbnail
+      document.querySelectorAll('[onclick="changeImage(this)"]').forEach(thumbnail => {
+        thumbnail.classList.remove('border-blue-500');
+        thumbnail.classList.add('border-transparent');
+      });
+      img.classList.remove('border-transparent');
+      img.classList.add('border-blue-500');
+    }
+
+    // Set the first thumbnail as selected by default
+    window.onload = function () {
+      const firstThumbnail = document.querySelector('[onclick="changeImage(this)"]');
+      if (firstThumbnail) {
+        firstThumbnail.classList.remove('border-transparent');
+        firstThumbnail.classList.add('border-blue-500');
+      }
+    };
+  </script>
+</body>
+
+</html>

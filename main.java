@@ -1,18 +1,23 @@
+import java.io.*;
 
-interface Shape {
-  default void area() {
-    System.out.print("finding area..");
+public class main {
+  public static void main(string[] arg) {
+    try {
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+      String input = br.readLine();
+      int n = Integer.parseInt(input);
+      int[] arr = new int[n];
+      for (int i = 0; i < n; i++) {
+        arr[i] = Integer.parseInt(br.readLine());
+      }
+      System.out.println("Array length: " + arr.length);
+    } catch (IOException e) {
+      e.printStackTrace();
+    } catch (NumberFormatException e) {
+      System.out.println("Invalid input. Please enter a number.");
+    }
   }
-}
-
-class Circle implements Shape {
-  public void area() {
-    System.out.print("Area is "+(3.14 *5*5));
-  }
-}
-public class Main {
   public static void main(String[] args) {
-    Child obj = new Child("John", 10);
-    obj.display();
+    main.main(args);
   }
 }
